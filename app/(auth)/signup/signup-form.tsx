@@ -15,7 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LucideLock, LucideMail } from "lucide-react";
 import Link from "next/link";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const LoginformSchema = z
   .object({
