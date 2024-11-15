@@ -65,10 +65,10 @@ export default function SignupForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideMail type="standard" strokeWidth={2} size={16} className="absolute left-2" />
+                  <LucideMail type="standard" strokeWidth={2} size={16} className="absolute left-3" />
                     <Input
                       {...field}
-                      className="pl-7"
+                      className="pl-8"
                       placeholder="Email"
                       type="e-mail"
                     />
@@ -85,10 +85,10 @@ export default function SignupForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-2" />
+                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-3" />
                     <Input
                       {...field}
-                      className="pl-7"
+                      className="pl-8"
                       placeholder="Password"
                       type="password"
                     />
@@ -105,10 +105,10 @@ export default function SignupForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-2" />
+                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-3" />
                     <Input
                       {...field}
-                      className="pl-7"
+                      className="pl-8"
                       placeholder="Confirm Password"
                       type="password"
                     />

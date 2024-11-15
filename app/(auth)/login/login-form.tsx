@@ -52,10 +52,10 @@ export default function LoginForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                    <MailIcon type="standard" strokeWidth={2} size={16} className="absolute left-2" />
+                    <MailIcon type="standard" strokeWidth={2} size={16} className="absolute left-3" />
                     <Input
                       {...field}
-                      className="pl-7"
+                      className="pl-8"
                       placeholder="Email"
                       type="email"
                     />
@@ -72,10 +72,10 @@ export default function LoginForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                    <LockIcon type="standard" strokeWidth={2} size={16} className="absolute left-2" />
+                    <LockIcon type="standard" strokeWidth={2} size={16} className="absolute left-3" />
                     <Input
                       {...field}
-                      className="pl-7"
+                      className="pl-8"
                       placeholder="Password"
                       type="password"
                     />
