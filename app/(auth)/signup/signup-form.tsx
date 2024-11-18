@@ -13,14 +13,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LucideLock, LucideMail } from "lucide-react";
+import { LucideAtSign, LucideLock } from "lucide-react";
 import Link from "next/link";
 
 const LoginformSchema = z
   .object({
-    email: z.string().email({
-      message: "Please enter a valid email address",
-    }),
+    handle: z.string(),
     password: z.string().min(8, {
       message: "Password must be at least 8 characters long",
     }),
@@ -40,7 +38,7 @@ export default function SignupForm() {
   const form = useForm<z.infer<typeof LoginformSchema>>({
     resolver: zodResolver(LoginformSchema),
     defaultValues: {
-      email: "",
+      handle: "",
       password: "",
       confirmPassword: "",
 
@@ -60,17 +58,17 @@ export default function SignupForm() {
         <div className="flex flex-col space-y-2">
           <FormField
             control={form.control}
-            name="email"
+            name="handle"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideMail type="standard" strokeWidth={2} size={16} className="absolute left-3" />
+                  <LucideAtSign type="standard" strokeWidth={2} size={16} className="absolute left-2.5" />
                     <Input
                       {...field}
                       className="pl-8"
-                      placeholder="Email"
-                      type="e-mail"
+                      placeholder="handle"
+                      type="username"
                     />
                   </div>
                 </FormControl>
@@ -85,7 +83,7 @@ export default function SignupForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-3" />
+                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-2.5" />
                     <Input
                       {...field}
                       className="pl-8"
@@ -105,7 +103,7 @@ export default function SignupForm() {
               <FormItem>
                 <FormControl>
                   <div className="flex items-center relative">
-                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-3" />
+                  <LucideLock type="standard" strokeWidth={2} size={16} className="absolute left-2.5" />
                     <Input
                       {...field}
                       className="pl-8"
