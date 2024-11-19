@@ -82,28 +82,12 @@ const SuggestedUsers = [
   },
 ];
 
-function FollowSuggestion(props:any) {
+function FollowSuggestionAdd() {
     const [Following, setFollowing] = useState(Boolean);
   return (
-    <Link
-    href={props.user.url}
-    key={props.user.username}
-    className={`flex items-center justify-between group`}
-  >
-      <div className="flex items-center space-x-2">
-      <Avatar>
-          <AvatarFallback><LucideUser size={16}/></AvatarFallback>
-      </Avatar>
-      <div className="flex flex-col text-sm">
-          <span className="leading-tight group-hover:text-foreground/80 transition-colors">{props.user.name}</span>
-          <span className="leading-tight text-muted-foreground">@{props.user.username}</span>
-      </div>
-      </div>
-
-      <Button onClick={() => setFollowing(!Following)} variant={Following == false ? 'outline' : 'secondary'} size={'icon'}>
-        {Following == false ? <LucidePlus/> : <LucideCheck/>}
-      </Button>
-  </Link>
+    <Button onClick={() => setFollowing(!Following)} variant={Following == false ? 'outline' : 'secondary'} size={'icon'}>
+    {Following == false ? <LucidePlus/> : <LucideCheck/>}
+  </Button>
   )
 }
 
@@ -186,7 +170,22 @@ export default function SidebarRight() {
           {SuggestedUsers.map((user) => {
               return (
                 
-             <FollowSuggestion user={user} />
+                <Link
+                  href={user.url}
+                  key={user.username}
+                  className={`flex items-center justify-between group`}
+                >
+                    <div className="flex items-center space-x-2">
+                    <Avatar>
+                        <AvatarFallback><LucideUser size={16}/></AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col text-sm">
+                        <span className="leading-tight group-hover:text-foreground/80 transition-colors">{user.name}</span>
+                        <span className="leading-tight text-muted-foreground">@{user.username}</span>
+                    </div>
+                    </div>
+                    <FollowSuggestionAdd/>
+                </Link>
               );
             })}
           </CardContent>
