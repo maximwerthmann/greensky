@@ -82,6 +82,31 @@ const SuggestedUsers = [
   },
 ];
 
+function FollowSuggestion(props:any) {
+    const [Following, setFollowing] = useState(Boolean);
+  return (
+    <Link
+    href={props.user.url}
+    key={props.user.username}
+    className={`flex items-center justify-between group`}
+  >
+      <div className="flex items-center space-x-2">
+      <Avatar>
+          <AvatarFallback><LucideUser size={16}/></AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col text-sm">
+          <span className="leading-tight group-hover:text-foreground/80 transition-colors">{props.user.name}</span>
+          <span className="leading-tight text-muted-foreground">@{props.user.username}</span>
+      </div>
+      </div>
+
+      <Button onClick={() => setFollowing(!Following)} variant={Following == false ? 'outline' : 'secondary'} size={'icon'}>
+        {Following == false ? <LucidePlus/> : <LucideCheck/>}
+      </Button>
+  </Link>
+  )
+}
+
 export default function SidebarRight() {
   const [Feed, setFeed] = useState("following");
   const pathname = usePathname();
@@ -159,28 +184,9 @@ export default function SidebarRight() {
           <CardContent className="flex flex-col space-y-4">
 
           {SuggestedUsers.map((user) => {
-              const [Following, setFollowing] = useState(Boolean);
               return (
                 
-                <Link
-                  href={user.url}
-                  key={user.username}
-                  className={`flex items-center justify-between group`}
-                >
-                    <div className="flex items-center space-x-2">
-                    <Avatar>
-                        <AvatarFallback><LucideUser size={16}/></AvatarFallback>
-                    </Avatar>
-                    <div className="flex flex-col text-sm">
-                        <span className="leading-tight group-hover:text-foreground/80 transition-colors">{user.name}</span>
-                        <span className="leading-tight text-muted-foreground">@{user.username}</span>
-                    </div>
-                    </div>
-
-                    <Button onClick={() => setFollowing(!Following)} variant={Following == false ? 'outline' : 'secondary'} size={'icon'}>
-                      {Following == false ? <LucidePlus/> : <LucideCheck/>}
-                    </Button>
-                </Link>
+             <FollowSuggestion user={user} />
               );
             })}
           </CardContent>
