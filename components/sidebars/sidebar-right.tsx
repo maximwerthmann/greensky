@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  LucideCheck,
     LucideCloud,
   LucideFlame,
   LucideHash,
@@ -13,28 +14,29 @@ import {
   SearchIcon,
 } from "lucide-react";
 import { Input } from "../ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { ModeToggle } from "../mode-toggle";
+import { useState } from "react";
 
 const Feeds = [
   {
     title: "Following",
-    url: "/home",
+    id: "following",
     icon: LucideUsers,
   },
   {
     title: "Discover",
-    url: "/feed/following",
+    id: "discover",
     icon: LucideFlame,
   },
   {
     title: "For You",
-    url: "/feed/following",
+    id: "for-you",
     icon: LucideSparkles,
   },
 ];
@@ -42,12 +44,12 @@ const Feeds = [
 const MoreFeeds = [
     {
       title: "A custom feed",
-      url: "/feed/anotherfeed",
+      id: "cloud",
       icon: LucideCloud,
     },
     {
       title: "Another custom feed",
-      url: "/feed/art",
+      id: "images",
       icon: LucideImage,
     },
   ];
@@ -81,6 +83,7 @@ const SuggestedUsers = [
 ];
 
 export default function SidebarRight() {
+  const [Feed, setFeed] = useState("following");
   const pathname = usePathname();
   return (
     <div className="sticky top-0 h-screen hidden lg:flex p-4 w-80">
@@ -102,49 +105,52 @@ export default function SidebarRight() {
           <CardContent className="flex flex-col space-y-4">
             <div className="flex flex-col space-y-2">
             {Feeds.map((feed) => {
-              const isActive = pathname == feed.url;
+              const isActive = Feed == feed.id;
               return (
-                <Link
-                  href={feed.url}
-                  key={feed.title}
-                  className={`flex items-center space-x-4 rounded-md text-sm hover:text-foreground/80 transition-colors ${
+                <button
+                onClick={() => setFeed(feed.id)}
+                  key={feed.id}
+                  className={`flex items-center space-x-4 rounded-md text-sm group hover:text-foreground/80 transition-colors ${
                     isActive ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
-                  <div className={`rounded-md h-9 w-9 flex items-center justify-center border text-foreground transition-colors ${
+                  <div className={`rounded-md h-9 w-9 flex group-hover:border-foreground/25 items-center justify-center border text-foreground transition-colors ${
                     isActive ? "bg-secondary" : ""
                   }`}>
                     <feed.icon size={16} />
                   </div>
                   <span>{feed.title}</span>
-                </Link>
+                </button>
               );
             })}
             </div>
             <Separator/>
             <div className="flex flex-col space-y-2">
             {MoreFeeds.map((feed) => {
-              const isActive = pathname == feed.url;
+              const isActive = Feed == feed.id;
               return (
-                <Link
-                  href={feed.url}
-                  key={feed.title}
-                  className={`flex items-center space-x-4 rounded-md text-sm hover:text-foreground/80 transition-colors ${
+                <button
+                onClick={() => setFeed(feed.id)}
+                  key={feed.id}
+                  className={`flex items-center space-x-4 rounded-md text-sm group hover:text-foreground/80 transition-colors ${
                     isActive ? "text-foreground" : "text-muted-foreground"
                   }`}
                 >
-                  <div className={`rounded-sm h-9 w-9 flex items-center justify-center text-foreground transition-colors ${
-                    isActive ? "bg-secondary" : "border"
+                  <div className={`rounded-md h-9 w-9 flex group-hover:border-foreground/25 items-center justify-center border text-foreground transition-colors ${
+                    isActive ? "bg-secondary" : ""
                   }`}>
                     <feed.icon size={16} />
                   </div>
                   <span>{feed.title}</span>
-                </Link>
+                </button>
               );
             })}
             </div>
 
           </CardContent>
+          <CardFooter>
+            <Button variant={'outline'} className="w-full">More Feeds</Button>
+          </CardFooter>
         </Card>
         <Card>
           <CardHeader>
@@ -153,7 +159,9 @@ export default function SidebarRight() {
           <CardContent className="flex flex-col space-y-4">
 
           {SuggestedUsers.map((user) => {
+              const [Following, setFollowing] = useState(Boolean);
               return (
+                
                 <Link
                   href={user.url}
                   key={user.username}
@@ -169,13 +177,16 @@ export default function SidebarRight() {
                     </div>
                     </div>
 
-                    <Button variant={'outline'} size={'icon'}>
-                        <LucidePlus/>
+                    <Button onClick={() => setFollowing(!Following)} variant={Following == false ? 'outline' : 'secondary'} size={'icon'}>
+                      {Following == false ? <LucidePlus/> : <LucideCheck/>}
                     </Button>
                 </Link>
               );
             })}
           </CardContent>
+          <CardFooter>
+            <Button variant={'outline'} className="w-full">View More</Button>
+          </CardFooter>
         </Card>
       </div>
     </div>
