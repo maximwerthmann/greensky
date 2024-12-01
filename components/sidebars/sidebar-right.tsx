@@ -98,7 +98,7 @@ interface FeedSelectProps {
 
 function FeedSelect(props:FeedSelectProps) {
   return (
-    <button onClick={props.onClick} className="flex items-center space-x-2 w-full group">
+    <button onClick={props.onClick} className="flex items-center space-x-2 flex-1 group">
       <div className={`${props.active ? 'bg-secondary group-hover:bg-secondary/80' : 'border'} h-9 w-9 shadow-sm group-hover:bg-secondary transition-colors flex items-center justify-center rounded-lg`}>
         <props.icon size ={16} />
       </div>
@@ -122,17 +122,17 @@ interface FeedDialogProps {
   children: ReactElement;
 }
 
+function AddFeed() {
+  const [Selected, setSelected] = useState(false);
+  return (
+    <Button onClick={() => setSelected(!Selected)} size={'icon'} variant={'outline'} className={Selected ? 'bg-secondary' : ''}>
+    {Selected ? <LucideMinus/> : <LucidePlus/>}
+  </Button>
+  )
+}
+
 function FeedDialog(props:FeedDialogProps) {
   const [Feed, setFeed] = useState("following");
-
-  function AddFeed() {
-    const [Selected, setSelected] = useState(false);
-    return (
-      <Button onClick={() => setSelected(!Selected)} size={'icon'} variant={'outline'} className={Selected ? 'bg-secondary' : ''}>
-      {Selected ? <LucideMinus/> : <LucidePlus/>}
-    </Button>
-    )
-  }
 
   return (
     <Dialog>
@@ -202,11 +202,16 @@ export default function SidebarRight() {
             })}
             </div>
             <Separator/>
+            <CardTitle>
+              <span>Suggested Feeds</span>
+            </CardTitle>
             <div className="flex flex-col space-y-2">
             {MoreFeeds.map((feed) => {
-              const isActive = Feed == feed.id;
               return (
+                <div key={feed.id} className="flex">
                 <FeedSelect key={feed.id} onClick={() => setFeed(feed.id)} active={Feed == feed.id} icon={feed.icon}>{feed.title}</FeedSelect>
+                <AddFeed/>
+              </div>
               );
             })}
             </div>
