@@ -7,9 +7,9 @@ export default function RootLayout({
     children: React.ReactNode;
   }>) {
     return (
-      <main className="flex-1 flex justify-center">
+      <main className="flex-1 flex lg:justify-center">
         <SidebarLeft/>
-        <div className="border-x min-h-screen lg:w-[600px]">
+        <div className="border-x min-h-screen w-full lg:w-[600px]">
         {children}
         </div>
         <SidebarRight/>

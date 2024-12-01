@@ -1,20 +1,34 @@
+import { ModeToggle } from "@/components/mode-toggle";
+import Post from "@/components/post";
 import { Button } from "@/components/ui/button";
-import { LucideArrowUp, LucideHash } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LucideArrowUp } from "lucide-react";
 
 export default function Page() {
     return (
-        <div className="flex flex-col">
-            <header className="w-full p-4 flex items-center space-x-4 border-b sticky top-0">
-            <Button variant={'outline'} size={'icon'}>
-                        <LucideHash/>
-                    </Button>
-                <div className="flex-1 flex items-center justify-center">
-                    <span className="text-lg font-bold">GreenSky</span>
-                </div>
+        <Tabs defaultValue="following" className="flex flex-col">
+            <header className="w-full flex items-center space-x-4 space-x-2 border-b h-14 px-4 bg-background z-20 sticky top-0">
+                <ModeToggle/>
+                <TabsList className="flex-1 justify-start">
+                    <TabsTrigger value="following">Following</TabsTrigger>
+                    <TabsTrigger value="discover">Discover</TabsTrigger>
+                    <TabsTrigger value="trending">Trending</TabsTrigger>
+                </TabsList>
                 <Button variant={'outline'} size={'icon'}>
-                        <LucideArrowUp/>
-                    </Button>
+                    <LucideArrowUp/>
+                </Button>
+
             </header>
-        </div>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+            <Post/>
+        </Tabs>
     )
 }

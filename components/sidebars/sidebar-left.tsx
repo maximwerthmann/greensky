@@ -2,9 +2,13 @@
 
 import {
   LucideBell,
+  LucideBookmark,
+  LucideHash,
   LucideHome,
+  LucideList,
   LucideMessageCircle,
   LucideMessageCircleReply,
+  LucidePackageOpen,
   LucideSearch,
   LucideSettings,
   LucideUser,
@@ -13,13 +17,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { ModeToggle } from "../mode-toggle";
 
 const NavigationLinks = [
   {
     title: "Home",
     href: "/home",
     icon: LucideHome,
+  },
+  {
+    title: "Feeds",
+    href: "/feeds",
+    icon: LucideHash,
   },
   {
     title: "Search",
@@ -32,9 +40,19 @@ const NavigationLinks = [
     icon: LucideBell,
   },
   {
+    title: "Bookmarks",
+    href: "/bookmarks",
+    icon: LucideBookmark,
+  },
+  {
     title: "Messages",
     href: "/messages",
     icon: LucideMessageCircle,
+  },
+  {
+    title: "Lists",
+    href: "/lists",
+    icon: LucideList,
   },
   {
     title: "Profile",
@@ -63,19 +81,20 @@ export default function SidebarLeft() {
               <Link
                 href={item.href}
                 key={item.title}
-                className={`flex items-center space-x-4 hover:bg-secondary h-10 rounded-md px-4 transition-transform duration-500 ${
-                  isActive ? "bg-secondary" : ""
-                }`}
               >
-                <item.icon size={20} />
+                <Button variant={isActive ? 'accent' : 'ghost'} className="justify-start px-4 w-full">
+                  <span>
+                  <item.icon />
+                  </span>
                 <span>
                   {item.title}
                 </span>
+                </Button>
               </Link>
             );
           })}
         </div>
-        <Button className="h-10 text-base">Post</Button>
+        <Button size={'lg'}>Post</Button>
       </div>
     </div>
   );
